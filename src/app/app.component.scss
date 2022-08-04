@@ -1,0 +1,35 @@
+.quiz-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 627px;
+}
+
+.quiz-header {
+  background-color: #212149;
+  color: white;
+  display: flex;
+  border-radius: 20px;
+
+  #question {
+    display: inline-block;
+    float: left;
+    padding: 20px;
+  }
+  #options {
+    margin-bottom: 18px;
+    margin-top: 10px;
+    margin-right: 14px;
+    display: inline-block;
+    width: 400px;
+  
+    li {
+      border: 2px solid white;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 15px;
+    }
+  }
+}
+
