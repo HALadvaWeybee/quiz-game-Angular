@@ -1,7 +1,7 @@
 <div class="quiz-container center" *ngIf="menuShow">
   <div class="quiz-header">
     <h3 id="question" #questionF>
-      <h2>Question:{{4-(tempArr.length - 1)}}/{{4}}</h2>
+      <h2>Question:{{leng-(tempArr.length - 1)}}/{{leng}}</h2>
       {{question}}
     </h3>
     <ul type="none" id="options">
@@ -22,5 +22,5 @@
 </div>
 
 <div class="result center" *ngIf="resultShow">
-  <div class="showRE center">You scored {{count}} out of {{4}}</div>
+  <div class="showRE center">You scored {{count}} out of {{leng}}</div>
 </div>

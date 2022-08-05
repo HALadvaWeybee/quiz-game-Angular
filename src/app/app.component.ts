@@ -59,6 +59,7 @@ export class AppComponent {
   answers: any[] = this.mcqData.map((ele: any) => ele.answer);
   tempArr: any[] = this.mcqData;
   count: number = 0;
+  leng:number = this.mcqData.length;
   
   select(item: any) {
     if (this.tempArr.length === 1) {
