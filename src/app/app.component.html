@@ -1,46 +1,26 @@
-<h1>Hello this my quiz app</h1>
-
-<!-- <div class="quiz-container" id="quiz">
+<div class="quiz-container center" *ngIf="menuShow">
   <div class="quiz-header">
-      <h2 id="question">Question text</h2>
-      <ul type="none">
-          <li>
-              <input type="radio" name="mcq" id="a" class="answer">
-              <label for="mcq" id="text_a" (click)="select('a')">a</label>
-          </li>
-          <li>
-              <input type="radio" name="mcq" id="b" class="answer">
-              <label for="mcq" id="text_b" (click)="select('b')">b</label>
-          </li>
-          <li>
-              <input type="radio" name="mcq" id="c" class="answer">
-              <label for="mcq" id="text_c" (click)="select('c')">c</label>
-          </li>
-          <li>
-              <input type="radio" name="mcq" id="d" class="answer">
-              <label for="mcq" id="text_d" (click)="select('d')">d</label>
-          </li>
-      </ul>
-  </div>
-  <button id="button">submit</button>
-</div> -->
-<div class="quiz-container" >
-  <div class="quiz-header">
-    <h3 id="question"><span>1</span>{{question}}</h3>
+    <h3 id="question" #questionF>
+      <h2>Question:{{4-(tempArr.length - 1)}}/{{4}}</h2>
+      {{question}}
+    </h3>
     <ul type="none" id="options">
-      <li #optA (click)="select(optA.innerHTML)">
+      <li #optA (click)="select(optA.id)" id="a">
         {{a}}
       </li>
-      <li #optB (click)="select(optB.innerHTML)">
+      <li #optB (click)="select(optB.id)" id="b">
         {{b}}
       </li>
-      <li #optC (click)="select(optC.innerHTML)">
+      <li #optC (click)="select(optC.id)" id="c">
         {{c}}
       </li>
-      <li #optD (click)="select(optD.innerHTML)">
+      <li #optD (click)="select(optD.id)" id="d">
         {{d}}
       </li>
   </ul>
 </div>
 </div>
-  
+
+<div class="result center" *ngIf="resultShow">
+  <div class="showRE center">You scored {{count}} out of {{4}}</div>
+</div>
