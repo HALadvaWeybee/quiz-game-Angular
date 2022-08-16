@@ -26,15 +26,15 @@ export class AppComponent {
     this.getApiData();
   }
   
-  // shuffle(array:any) {
-  //   let currentIndex = array.length,  randomIndex;
-  //   while (currentIndex != 0) {
-  //     randomIndex = Math.floor(Math.random() * currentIndex);
-  //     currentIndex--;
-  //     [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-  //   }
-  //   return array;
-  // }
+  shuffle(array:any) {
+    let currentIndex = array.length,  randomIndex;
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+    return array;
+  }
 
   getApiData() {
     this.http.get(this.url).subscribe((data:any) => {
@@ -44,8 +44,8 @@ export class AppComponent {
          this.tempAns.push(ele['incorrect_answers'][0]);
          this.tempAns.push(ele['incorrect_answers'][1]?ele['incorrect_answers'][1]:'none');
          this.tempAns.push(ele['incorrect_answers'][2]?ele['incorrect_answers'][2]:'none');
-         this.tempAns = this.tempAns.sort(() => (Math.random() > .5) ? 1 : -1);
-        // this.tempAns = this.shuffle(this.tempAns);
+        //  this.tempAns = this.tempAns.sort(() => (Math.random() > .5) ? 1 : -1);
+        this.tempAns = this.shuffle(this.tempAns);
          this.quesArr.push({
             question: ele.question,
             a: this.tempAns[0],
