@@ -1,0 +1,28 @@
+<div class="quiz-container center" *ngIf="menuShow">
+    <div class="quiz-header">
+      <h3 id="question" #questionF>
+        <h2>Question:{{leng-(quesArr.length - 1)}}/{{leng}}</h2>
+        <i>{{question}}</i>
+      </h3>
+      <ul type="none" id="options">
+        <li #optA (click)="select(a)" id="a" *ngIf="a!=='none'">
+          {{a}}
+        </li>
+        <li #optB (click)="select(b)" id="b" *ngIf="b!=='none'">
+          {{b}}
+        </li>
+        <li #optC (click)="select(c)" id="c" *ngIf="c!=='none'">
+          {{c}}
+        </li>
+        <li #optD (click)="select(d)" id="d" *ngIf="d!=='none'">
+          {{d}}
+        </li>
+    </ul>
+  </div>
+  </div>
+  
+  <div class="result center" *ngIf="resultShow">
+    <div class="showRE center">You scored {{count}} out of {{leng}}</div>
+    <div style="clear: both"></div>
+    <button (click)="resetQuiz()">Reset Quiz</button>
+  </div>

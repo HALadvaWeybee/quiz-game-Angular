@@ -1,0 +1,31 @@
+.api--helper {
+  width: 50%;
+  margin: auto;
+  // display: flex;
+  // align-items: center;
+  // flex-direction: column;
+  // justify-content: center;
+  input,
+  select {
+    display: block;
+  }
+  input {
+    padding: 11px;
+    font-size: 25px;
+    width: 983px;
+  }
+
+  label {
+    font-size: 19px;
+  }
+  select {
+    padding: 13px;
+    font-size: 25px;
+    width: 1008px;
+  }
+  .btn {
+    border-radius: 20px;
+    padding: 17px;
+    font-size: 21px;
+  }
+}
