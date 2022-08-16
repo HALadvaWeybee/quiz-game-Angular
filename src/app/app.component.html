@@ -1,20 +1,20 @@
 <div class="quiz-container center" *ngIf="menuShow">
   <div class="quiz-header">
     <h3 id="question" #questionF>
-      <h2>Question:{{leng-(tempArr.length - 1)}}/{{leng}}</h2>
+      <h2>Question:{{leng-(quesArr.length - 1)}}/{{leng}}</h2>
       {{question}}
     </h3>
     <ul type="none" id="options">
-      <li #optA (click)="select(optA.id)" id="a">
+      <li #optA (click)="select(a)" id="a" *ngIf="a!=='none'">
         {{a}}
       </li>
-      <li #optB (click)="select(optB.id)" id="b">
+      <li #optB (click)="select(b)" id="b" *ngIf="b!=='none'">
         {{b}}
       </li>
-      <li #optC (click)="select(optC.id)" id="c">
+      <li #optC (click)="select(c)" id="c" *ngIf="c!=='none'">
         {{c}}
       </li>
-      <li #optD (click)="select(optD.id)" id="d">
+      <li #optD (click)="select(d)" id="d" *ngIf="d!=='none'">
         {{d}}
       </li>
   </ul>
