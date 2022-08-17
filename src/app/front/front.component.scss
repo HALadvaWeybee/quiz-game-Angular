@@ -12,7 +12,6 @@
   input {
     padding: 11px;
     font-size: 25px;
-    width: 983px;
   }
 
   label {
@@ -27,5 +26,18 @@
     border-radius: 20px;
     padding: 17px;
     font-size: 21px;
+    cursor: pointer;
+  }
+  .w100 {
+     input {
+       width: 97.7%;
+     }
+     select, button {
+       width: 100%;
+     }
+     .btn {
+      margin-top: 20px;
+      font-size: 25px;
+     }
   }
 }

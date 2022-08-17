@@ -6,12 +6,14 @@ import { FrontComponent } from './front/front.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FrontComponent,
-    QuizComponent
+    QuizComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

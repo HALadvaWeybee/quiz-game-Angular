@@ -1,28 +1,47 @@
+<div class="d-flex justify-content-center" *ngIf="showLoader">
+  <div class="spinner-border" role="status">
+      <span class="sr-only" id="loading"></span>
+  </div>
+</div>
 <div class="quiz-container center" *ngIf="menuShow">
     <div class="quiz-header">
       <h3 id="question" #questionF>
         <h2>Question:{{leng-(quesArr.length - 1)}}/{{leng}}</h2>
-        <i>{{question}}</i>
+        <i>{{question}}</i> 
       </h3>
       <ul type="none" id="options">
-        <li #optA (click)="select(a)" id="a" *ngIf="a!=='none'">
+        <li #optA (click)="select(a,question)" id="a" *ngIf="a!=='none'">
           {{a}}
         </li>
-        <li #optB (click)="select(b)" id="b" *ngIf="b!=='none'">
+        <li #optB (click)="select(b,question)" id="b" *ngIf="b!=='none'">
           {{b}}
         </li>
-        <li #optC (click)="select(c)" id="c" *ngIf="c!=='none'">
+        <li #optC (click)="select(c,question)" id="c" *ngIf="c!=='none'">
           {{c}}
         </li>
-        <li #optD (click)="select(d)" id="d" *ngIf="d!=='none'">
+        <li #optD (click)="select(d,question)" id="d" *ngIf="d!=='none'">
           {{d}}
         </li>
     </ul>
   </div>
   </div>
   
-  <div class="result center" *ngIf="resultShow">
-    <div class="showRE center">You scored {{count}} out of {{leng}}</div>
-    <div style="clear: both"></div>
-    <button (click)="resetQuiz()">Reset Quiz</button>
+  <div class="main-result center" *ngIf="resultShow">
+    <div class="resultShow" *ngIf="resultShow">
+         <ul *ngFor="let item of showResult; let indexOfelement=index">
+             <li style="list-style-type: none;">{{indexOfelement + 1}} {{item.question}}</li>
+             <li [ngClass]="matchResult(item.id,item.a)" *ngIf="item.a!='none'">A. {{item.a}}</li>
+             <li [ngClass]="matchResult(item.id,item.b)" *ngIf="item.b!='none'">B. {{item.b}}</li>
+             <li [ngClass]="matchResult(item.id,item.c)" *ngIf="item.c!='none'">C. {{item.c}}</li>
+             <li [ngClass]="matchResult(item.id,item.d)" *ngIf="item.d!='none'">D. {{item.d}}</li>
+         </ul>
+    </div>
+    <div class="result">
+      <div class="showRE">You scored {{count}} out of {{leng}}</div> 
+    </div>
+    <div class="button">
+      <button (click)="resetQuiz()" class="btn">Reset Quiz</button> 
+    </div>
   </div>
+ 
+

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component , OnInit ,ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApidataService } from '../apidata.service';
 import { Router } from '@angular/router';
@@ -9,9 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit {
-  ngOnInit(): void {
-  }
-
+  
   question: string = '';
   a: string = '';
   b: string = '';
@@ -23,15 +21,24 @@ export class QuizComponent implements OnInit {
   quesArr:{question:string, a:any, b:any, c:any, d:any,answer:string}[] =[];
   answers:any[] = [];
   tempAns:any[] = [];
+  showResult:any[] = [];
   leng:number=0;
   count:number = 0;
+  showLoader:boolean = true;
 
-  constructor(private http: HttpClient, private apidata: ApidataService, private route: Router) {
+  constructor(private http: HttpClient, private apidata: ApidataService, private route: Router, private elementRef: ElementRef) {
     console.log("data recied", this.apidata.data);
-    
     this.getApiData(this.apidata.data);
+    this.menuShow= false;
   }
-  
+  ngOnInit(): void {
+    
+  }
+  hideloader() {
+   this.showLoader= false;  
+   this.menuShow = true;       
+  }
+
   shuffle(array:any) {
     let currentIndex = array.length,  randomIndex;
     while (currentIndex != 0) {
@@ -43,26 +50,43 @@ export class QuizComponent implements OnInit {
   }
 
   getApiData(url:any) {
-    console.log("link", url);
+    // console.log("link", url);
     this.http.get(url).subscribe((data:any) => {
-      console.log("data",data.results);
-      
+      // console.log("data",data.results);
+      if(data) {
+        this.hideloader();
+      }
       data.results.forEach((ele:any) => {
          this.tempAns = [];
          this.tempAns.push(ele['correct_answer']);
          this.tempAns.push(ele['incorrect_answers'][0]);
-         this.tempAns.push(ele['incorrect_answers'][1]?ele['incorrect_answers'][1]:'none');
-         this.tempAns.push(ele['incorrect_answers'][2]?ele['incorrect_answers'][2]:'none');
+         if(ele['incorrect_answers'][1]!=undefined) {
+           this.tempAns.push(ele['incorrect_answers'][1]?ele['incorrect_answers'][1]:'none');
+           this.tempAns.push(ele['incorrect_answers'][2]?ele['incorrect_answers'][2]:'none');
+         }
         //  this.tempAns = this.tempAns.sort(() => (Math.random() > .5) ? 1 : -1);
         this.tempAns = this.shuffle(this.tempAns);
-         this.quesArr.push({
+         if(this.tempAns[2]!=undefined) {
+          this.quesArr.push({
             question: ele.question,
             a: this.tempAns[0],
             b: this.tempAns[1],
             c: this.tempAns[2],
             d: this.tempAns[3],
             answer: ele['correct_answer'],
-         })
+         });
+         } 
+         else {
+          this.quesArr.push({
+            question: ele.question,
+            a: this.tempAns[0],
+            b: this.tempAns[1],
+            c: 'none',
+            d: 'none',
+            answer: ele['correct_answer'],
+         });
+         }
+         
          this.answers.push(ele['correct_answer']);
         }
       );
@@ -77,12 +101,22 @@ export class QuizComponent implements OnInit {
     }); 
   }
   
-  select(item: any) {    
+  select(option: any, question:any) {    
     if (this.quesArr.length === 1) {
       this.menuShow = false;
       this.resultShow = true;
     }
-    if (this.answers[0] != item) {
+    this.showResult.push({
+       id:this.showResult.length + 1,
+       question:question,
+       isCorrect:this.answers[0],
+       isReceive:option,
+       a:this.quesArr[0].a,
+       b:this.quesArr[0].b,
+       c:this.quesArr[0].c,
+       d:this.quesArr[0].d,
+    })
+    if (this.answers[0] != option) {
       this.count = (this.count - 1);
     }
     if (this.quesArr.length > 1) {
@@ -97,6 +131,17 @@ export class QuizComponent implements OnInit {
   }
 
   resetQuiz() {
-     this.route.navigate(['front']);
+     this.route.navigate(['']);
+    //  this.route.navigate(['front']);
+  }
+
+  matchResult(id:number, option:any) {
+     let arr = this.showResult.filter((ele:any) => ele.id==id);
+     if(arr[0].isCorrect == option) {
+      return 'green';
+     } else if(arr[0].isReceive==option) {
+      return 'red'
+     }
+     return '';
   }
 }
