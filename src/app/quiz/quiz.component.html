@@ -1,43 +1,29 @@
-<div class="d-flex justify-content-center" *ngIf="showLoader">
-  <div class="spinner-border" role="status">
+<div *ngIf="indexOfQuestionArray == 0 && !questionShow">
+  <div class="spinner-border" role="status">  
       <span class="sr-only" id="loading"></span>
   </div>
 </div>
-<div class="quiz-container center" *ngIf="menuShow">
+<div class="quiz-container center" *ngIf="questionShow">
     <div class="quiz-header">
-      <h3 id="question" #questionF>
-        <h2>Question:{{leng-(quesArr.length - 1)}}/{{leng}}</h2>
-        <i>{{question}}</i> 
+      <h3 id="question">
+        <h2>Question:{{indexOfQuestionArray + 1}}/{{questionArray.length}}</h2>
+        <i>{{currentQuestion.question}}</i> 
       </h3>
-      <ul type="none" id="options">
-        <li #optA (click)="select(a,question)" id="a" *ngIf="a!=='none'">
-          {{a}}
-        </li>
-        <li #optB (click)="select(b,question)" id="b" *ngIf="b!=='none'">
-          {{b}}
-        </li>
-        <li #optC (click)="select(c,question)" id="c" *ngIf="c!=='none'">
-          {{c}}
-        </li>
-        <li #optD (click)="select(d,question)" id="d" *ngIf="d!=='none'">
-          {{d}}
-        </li>
-    </ul>
+      <ol type="none" id="options" type="A">
+        <li *ngFor="let option of currentQuestion.options;let indexOfelement = index" (click)="changeQuestion(option)">{{option}}</li>
+      </ol>
   </div>
   </div>
   
-  <div class="main-result center" *ngIf="resultShow">
-    <div class="resultShow" *ngIf="resultShow">
-         <ul *ngFor="let item of showResult; let indexOfelement=index">
-             <li style="list-style-type: none;">{{indexOfelement + 1}} {{item.question}}</li>
-             <li [ngClass]="matchResult(item.id,item.a)" *ngIf="item.a!='none'">A. {{item.a}}</li>
-             <li [ngClass]="matchResult(item.id,item.b)" *ngIf="item.b!='none'">B. {{item.b}}</li>
-             <li [ngClass]="matchResult(item.id,item.c)" *ngIf="item.c!='none'">C. {{item.c}}</li>
-             <li [ngClass]="matchResult(item.id,item.d)" *ngIf="item.d!='none'">D. {{item.d}}</li>
-         </ul>
+  <div class="main-result center" *ngIf="indexOfQuestionArray!=0 && !questionShow">
+    <div class="resultShow">
+        <ol *ngFor="let item of questionArray; let indexOfelement1 = index" type="A">
+          <h4>{{indexOfelement1+1}}   {{item.question}}</h4>
+          <li *ngFor="let option of item.options" [ngClass]="matchResult(indexOfelement1,option)">{{option}}</li>
+        </ol>
     </div>
     <div class="result">
-      <div class="showRE">You scored {{count}} out of {{leng}}</div> 
+      <div class="showRE">You scored {{getScore()}} out of {{questionArray.length}}</div> 
     </div>
     <div class="button">
       <button (click)="resetQuiz()" class="btn">Reset Quiz</button> 

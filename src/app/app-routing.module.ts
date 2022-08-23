@@ -5,9 +5,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  {path:'', component:FrontComponent},
   {path:'quiz',component:QuizComponent},  
   // {path:'front', component:FrontComponent},
-  {path:'', component:FrontComponent},
   {path:'**', component:ErrorComponent}
 ];
 

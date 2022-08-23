@@ -4,7 +4,7 @@
   <form (ngSubmit)="getFormValue(loginForm.value)" #loginForm="ngForm">
     <label for="amount">Number Of questions:</label>
    <div class="w100"> 
-    <input type="number" name="amount" #amount [(ngModel)]="defaultValues.defaultData" min="1" max="50"> 
+    <input type="number" name="amount" #amount [(ngModel)]="defaultNumber" min="1" max="50"> 
    </div>
   <br>
   <label for="category">Select Category:</label>
